@@ -1,6 +1,6 @@
 # Conf2env
 
-Tools for convert from settings to comfortable markdown table. 
+Tool for convert from settings to comfortable markdown table. 
 
 Support: enums, pydantic: nested models, env_prefix, env_nested_delimiter
 
