@@ -59,7 +59,7 @@ def pydantic_settings_to_table(obj: BaseSettings,
             example = field.field_info.extra['example']
 
         if issubclass(field.type_, Enum):
-            example = '; '.join(field.type_.__members__.keys())
+            example = 'Any of: ' + '; '.join([v.value for v in field.type_.__members__.values()])
 
         if field.required:
             # env_names = f'* {env_names}'
