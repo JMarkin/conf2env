@@ -11,7 +11,7 @@ Quickstart:
 Example result:
 ![screenshot](./doc/notes.png)
 
-More examples in [tests](./tests)
+More examples in [tests](./tests/conftest.py)
 
 TODO:
 - [ ] django
