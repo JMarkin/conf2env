@@ -4,11 +4,16 @@ Tool for convert from settings to comfortable markdown table.
 
 Support: enums, pydantic: nested models, env_prefix, env_nested_delimiter
 
-Quickstart: `python -m conf2env {module}:{object} > env.md`
+Quickstart: 
+1. `pip install conf2env`
+2. `python -m conf2env {module}:{object} > env.md`
 
-More examples in tests
+Example result:
+![screenshot](./doc/notes.png)
+
+More examples in [tests](./tests)
 
 TODO:
-- [] django
-- [] simple-settings
+- [ ] django
+- [ ] simple-settings
 
