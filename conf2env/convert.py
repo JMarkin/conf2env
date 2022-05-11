@@ -39,7 +39,7 @@ def pydantic_settings_to_table(obj: BaseSettings,
             env_name = env_name.upper()
 
         if isinstance(field.type_, ModelMetaclass):
-            if obj.Config.env_nested_delimiter:
+            if config.env_nested_delimiter:
                 prefix = f'{field.name}{config.env_nested_delimiter}'
             _ttable = pydantic_settings_to_table(field.type_,
                                                  prefix=prefix,
