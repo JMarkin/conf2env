@@ -3,7 +3,7 @@ from typing import Optional
 
 from pydantic import BaseSettings, Field
 
-from conf2env import COLS
+from conf2env.convert import COLS
 
 
 def get_settings():
@@ -31,8 +31,8 @@ def simple_settings():
         d: tuple = Field((1, 2), title='d', description='abc')
 
     _table = [
-        ['ENUM', '', ExampleEnum, 'A; B', '-'],
-        ['ENUM2', '', ExampleEnum, 'A; B', 'A'],
+        ['ENUM', '', ExampleEnum, 'Any of: A; B', '-'],
+        ['ENUM2', '', ExampleEnum, 'Any of: A; B', 'A'],
         ['A', '', str, '', '-'],
         ['B', '', int, 1, 1],
         ['C', 'c', list, [1, 2, 3], None],
@@ -42,14 +42,14 @@ def simple_settings():
     for row in _table:
         table.append(dict(zip(COLS, row)))
     markdown = """
-| Name  | Description | Type        | Example | Default |
-| ----- | ----------- | ----------- | ------- | ------- |
-| ENUM  |             | ExampleEnum | A; B    | -       |
-| ENUM2 |             | ExampleEnum | A; B    | A       |
-| A     |             | str         |         | -       |
-| B     |             | int         | 1       | 1       |
-| C     | c           | list        | 1,2,3   | None    |
-| D     | abc         | tuple       | 1,2     | (1, 2)  |
+| Name  | Description | Type        | Example      | Default |
+| ----- | ----------- | ----------- | ------------ | ------- |
+| ENUM  |             | ExampleEnum | Any of: A; B | -       |
+| ENUM2 |             | ExampleEnum | Any of: A; B | A       |
+| A     |             | str         |              | -       |
+| B     |             | int         | 1            | 1       |
+| C     | c           | list        | 1,2,3        | None    |
+| D     | abc         | tuple       | 1,2          | (1, 2)  |
 """
     markdown = markdown.lstrip()
     return SimpleSettings, table, markdown
