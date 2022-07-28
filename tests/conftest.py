@@ -29,6 +29,7 @@ def simple_settings():
         b: int = 1
         c: Optional[list] = Field(None, description='c', example=[1, 2, 3])
         d: tuple = Field((1, 2), title='d', description='abc')
+        env: str = Field(None, description='env', example='env', env=['test_env', 'env'])
 
     _table = [
         ['ENUM', '', ExampleEnum, 'Any of: A; B', '-'],
@@ -37,23 +38,24 @@ def simple_settings():
         ['B', '', int, 1, 1],
         ['C', 'c', list, [1, 2, 3], None],
         ['D', 'abc', tuple, (1, 2), (1, 2)],
+        ['Any of TEST_ENV; ENV', 'env', str, 'env', None],
     ]
     table = []
     for row in _table:
         table.append(dict(zip(COLS, row)))
     markdown = """
-| Name  | Description | Type        | Example      | Default |
-| ----- | ----------- | ----------- | ------------ | ------- |
-| ENUM  |             | ExampleEnum | Any of: A; B | -       |
-| ENUM2 |             | ExampleEnum | Any of: A; B | A       |
-| A     |             | str         |              | -       |
-| B     |             | int         | 1            | 1       |
-| C     | c           | list        | 1,2,3        | None    |
-| D     | abc         | tuple       | 1,2          | (1, 2)  |
+| Name                 | Description | Type        | Example      | Default |
+| -------------------- | ----------- | ----------- | ------------ | ------- |
+| ENUM                 |             | ExampleEnum | Any of: A; B | -       |
+| ENUM2                |             | ExampleEnum | Any of: A; B | A       |
+| A                    |             | str         |              | -       |
+| B                    |             | int         | 1            | 1       |
+| C                    | c           | list        | 1,2,3        | None    |
+| D                    | abc         | tuple       | 1,2          | (1, 2)  |
+| Any of TEST_ENV; ENV | env         | str         | env          | None    |
 """
     markdown = markdown.lstrip()
     return SimpleSettings, table, markdown
-
 
 def simple_settings_case_sensitive():
 
@@ -62,6 +64,7 @@ def simple_settings_case_sensitive():
         b: int = 1
         C: Optional[list] = Field(None, description='c', example=[1, 2, 3])
         D: tuple = Field((1, 2), title='d', description='abc')
+        env: str = Field(None, description='env', example='env', env=['test_env', 'env'])
 
         class Config:
             case_sensitive = True
@@ -71,17 +74,19 @@ def simple_settings_case_sensitive():
         ['b', '', int, 1, 1],
         ['C', 'c', list, [1, 2, 3], None],
         ['D', 'abc', tuple, (1, 2), (1, 2)],
+        ['Any of test_env; env', 'env', str, 'env', None],
     ]
     table = []
     for row in _table:
         table.append(dict(zip(COLS, row)))
     markdown = """
-| Name | Description | Type  | Example | Default |
-| ---- | ----------- | ----- | ------- | ------- |
-| a    |             | str   |         | -       |
-| b    |             | int   | 1       | 1       |
-| C    | c           | list  | 1,2,3   | None    |
-| D    | abc         | tuple | 1,2     | (1, 2)  |
+| Name                 | Description | Type  | Example | Default |
+| -------------------- | ----------- | ----- | ------- | ------- |
+| a                    |             | str   |         | -       |
+| b                    |             | int   | 1       | 1       |
+| C                    | c           | list  | 1,2,3   | None    |
+| D                    | abc         | tuple | 1,2     | (1, 2)  |
+| Any of test_env; env | env         | str   | env     | None    |
 """
     markdown = markdown.lstrip()
     return SimpleSettings, table, markdown
@@ -94,6 +99,7 @@ def simple_settings_prefix():
         b: int = 1
         c: Optional[list] = Field(None, description='c', example=[1, 2, 3])
         d: tuple = Field((1, 2), title='d', description='abc')
+        env: str = Field(None, description='env', example='env', env=['test_env', 'env'])
 
         class Config:
             env_prefix = 'TEST_'
@@ -103,17 +109,19 @@ def simple_settings_prefix():
         ['TEST_B', '', int, 1, 1],
         ['TEST_C', 'c', list, [1, 2, 3], None],
         ['TEST_D', 'abc', tuple, (1, 2), (1, 2)],
+        ['Any of TEST_ENV; ENV', 'env', str, 'env', None],
     ]
     table = []
     for row in _table:
         table.append(dict(zip(COLS, row)))
     markdown = """
-| Name   | Description | Type  | Example | Default |
-| ------ | ----------- | ----- | ------- | ------- |
-| TEST_A |             | str   |         | -       |
-| TEST_B |             | int   | 1       | 1       |
-| TEST_C | c           | list  | 1,2,3   | None    |
-| TEST_D | abc         | tuple | 1,2     | (1, 2)  |
+| Name                 | Description | Type  | Example | Default |
+| -------------------- | ----------- | ----- | ------- | ------- |
+| TEST_A               |             | str   |         | -       |
+| TEST_B               |             | int   | 1       | 1       |
+| TEST_C               | c           | list  | 1,2,3   | None    |
+| TEST_D               | abc         | tuple | 1,2     | (1, 2)  |
+| Any of TEST_ENV; ENV | env         | str   | env     | None    |
 """
     markdown = markdown.lstrip()
     return SimpleSettings, table, markdown
@@ -131,6 +139,7 @@ def nested_settings():
         c: Optional[list] = Field(None, description='c', example=[1, 2, 3])
         d: tuple = Field((1, 2), title='d', description='abc')
         nested: NestedSettings
+        env: str = Field(None, description='env', example='env', env=['test_env', 'env'])
 
     _table = [
         ['A', '', str, '', '-'],
@@ -139,19 +148,21 @@ def nested_settings():
         ['D', 'abc', tuple, (1, 2), (1, 2)],
         ['E', '', str, '', '-'],
         ['F', 'f', list, [1, 2, 3], None],
+        ['Any of TEST_ENV; ENV', 'env', str, 'env', None],
     ]
     table = []
     for row in _table:
         table.append(dict(zip(COLS, row)))
     markdown = """
-| Name | Description | Type  | Example | Default |
-| ---- | ----------- | ----- | ------- | ------- |
-| A    |             | str   |         | -       |
-| B    |             | int   | 1       | 1       |
-| C    | c           | list  | 1,2,3   | None    |
-| D    | abc         | tuple | 1,2     | (1, 2)  |
-| E    |             | str   |         | -       |
-| F    | f           | list  | 1,2,3   | None    |
+| Name                 | Description | Type  | Example | Default |
+| -------------------- | ----------- | ----- | ------- | ------- |
+| A                    |             | str   |         | -       |
+| B                    |             | int   | 1       | 1       |
+| C                    | c           | list  | 1,2,3   | None    |
+| D                    | abc         | tuple | 1,2     | (1, 2)  |
+| E                    |             | str   |         | -       |
+| F                    | f           | list  | 1,2,3   | None    |
+| Any of TEST_ENV; ENV | env         | str   | env     | None    |
 """
     markdown = markdown.lstrip()
     return SimpleSettings, table, markdown
@@ -169,6 +180,7 @@ def nested_settings_delimitr():
         c: Optional[list] = Field(None, description='c', example=[1, 2, 3])
         d: tuple = Field((1, 2), title='d', description='abc')
         nested: NestedSettings
+        env: str = Field(None, description='env', example='env', env=['test_env', 'env'])
 
         class Config:
             env_nested_delimiter = "_"
@@ -180,19 +192,21 @@ def nested_settings_delimitr():
         ['D', 'abc', tuple, (1, 2), (1, 2)],
         ['NESTED_E', '', str, '', '-'],
         ['NESTED_F', 'f', list, [1, 2, 3], None],
+        ['Any of TEST_ENV; ENV', 'env', str, 'env', None],
     ]
     table = []
     for row in _table:
         table.append(dict(zip(COLS, row)))
     markdown = """
-| Name     | Description | Type  | Example | Default |
-| -------- | ----------- | ----- | ------- | ------- |
-| A        |             | str   |         | -       |
-| B        |             | int   | 1       | 1       |
-| C        | c           | list  | 1,2,3   | None    |
-| D        | abc         | tuple | 1,2     | (1, 2)  |
-| NESTED_E |             | str   |         | -       |
-| NESTED_F | f           | list  | 1,2,3   | None    |
+| Name                 | Description | Type  | Example | Default |
+| -------------------- | ----------- | ----- | ------- | ------- |
+| A                    |             | str   |         | -       |
+| B                    |             | int   | 1       | 1       |
+| C                    | c           | list  | 1,2,3   | None    |
+| D                    | abc         | tuple | 1,2     | (1, 2)  |
+| NESTED_E             |             | str   |         | -       |
+| NESTED_F             | f           | list  | 1,2,3   | None    |
+| Any of TEST_ENV; ENV | env         | str   | env     | None    |
 """
     markdown = markdown.lstrip()
     return SimpleSettings, table, markdown
