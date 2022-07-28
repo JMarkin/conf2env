@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "conf2env"
-version = "0.0.1b1"
+version = "0.0.1b2"
 description = ""
 authors = ["jmarkin <me@jmarkin.ru>"]
 
