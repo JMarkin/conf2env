@@ -1,20 +1,25 @@
 [tool.poetry]
 name = "conf2env"
-version = "0.0.1b2"
+version = "0.0.1a1"
 description = ""
 authors = ["jmarkin <me@jmarkin.ru>"]
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0"
-pydantic = "^1.9.0"
+pydantic = { version = "^1.9.0", optional = true }
+django-environ = { version = "^0.10.0", optional = true }
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.extras]
+django = ["django-environ"]
+pydantic = ["pydantic"]
+
+[tool.poetry.group.dev.dependencies]
 yapf = "^0.32.0"
 isort = "^5.10.1"
 pytest = "^7.1.1"
-pylint = "^2.13.5"
 docformatter = "^1.4"
 toml = "^0.10.2"
+ruff = "^0.0.257"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
